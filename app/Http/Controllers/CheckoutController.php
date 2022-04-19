@@ -2,23 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PaymentRequest;
 use App\Payments\PaymentMethod;
-use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
 
-    public function pay(Request $request)
+    public function pay(PaymentRequest $request)
     {
-        $this->validate($request, [
-            'card_number' => ['required'],
-            'expiry_month' => ['required'],
-            'expiry_year' => ['required'],
-            'cvc' => ['required'],
-            'amount' => ['required', 'numeric', 'min:0.01'],
-            'type' => ['required', 'string']
-        ]);
-
         try {
             $paymentMethod = new PaymentMethod(
                 $request->card_number,

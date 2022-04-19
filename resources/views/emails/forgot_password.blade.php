@@ -6,5 +6,7 @@
         Hi {{ $user->name }},
     </h1>
 
-    <p>Here is your password reset token: <strong>{{ $token }}</strong> </p>
+    <p>In order to reset your password, click on the following:
+        <a href="{{ config('app.frontend_url') . '?token=' . $token }}">link</a>
+    </p>
 @endsection

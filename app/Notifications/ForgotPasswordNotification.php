@@ -43,7 +43,8 @@ class ForgotPasswordNotification extends Notification implements ShouldQueue
         return (new MailMessage())
             ->view('emails.forgot_password', [
                 'user' => $notifiable,
-                'token' => $this->token
+                'token' => $this->token,
+                'url' => config('sanctum.stateful')
             ]);
     }
 

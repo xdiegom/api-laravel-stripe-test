@@ -17,7 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string("stripe_payment_method_id");
             $table->string("alias")->nullable();
-            $table->unsignedBigInteger("user_id");
+            $table->uuid("user_id");
             $table->boolean("default")->default(false);
             $table->timestamps();
 

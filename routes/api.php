@@ -2,13 +2,8 @@
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\PaymentMethodController;
 use Illuminate\Support\Facades\Route;
-
-Route::controller(CheckoutController::class)->group(function () {
-    Route::post('pay', 'pay');
-});
-
 
 Route::middleware('guest')->group(function () {
     Route::controller(ForgotPasswordController::class)->group(function () {
@@ -18,5 +13,6 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('payment-method', PaymentMethodController::class);
     Route::post('/reset-password', [ResetPasswordController::class, 'store']);
 });

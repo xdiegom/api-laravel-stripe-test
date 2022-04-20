@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Helpers\StripeHelper;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Cashier\Cashier;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Cashier::ignoreMigrations();
+
+        $this->app->singleton('stripe-helper', function () {
+            return new StripeHelper(Auth::user());
+        });
     }
 
     /**
